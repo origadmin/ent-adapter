@@ -23,18 +23,13 @@ import (
 
 	"entgo.io/ent/dialect"
 	entsql "entgo.io/ent/dialect/sql"
+	"github.com/casbin/casbin/v2/model"
 	"github.com/casbin/casbin/v2/persist"
+	"github.com/pkg/errors"
+
+	"github.com/casbin/ent-adapter/ent"
 	"github.com/casbin/ent-adapter/ent/casbinrule"
 	"github.com/casbin/ent-adapter/ent/predicate"
-
-	"github.com/casbin/casbin/v2/model"
-	"github.com/casbin/ent-adapter/ent"
-	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/jackc/pgx/v4/stdlib"
-	_ "github.com/lib/pq"
-
-	//_ "github.com/mattn/go-sqlite3"
-	"github.com/pkg/errors"
 )
 
 const (
@@ -315,8 +310,10 @@ func (a *Adapter) WithTx(fn func(tx *ent.Tx) error) error {
 }
 
 func loadPolicyLine(line *ent.CasbinRule, model model.Model) {
-	var p = []string{line.Ptype,
-		line.V0, line.V1, line.V2, line.V3, line.V4, line.V5}
+	var p = []string{
+		line.Ptype,
+		line.V0, line.V1, line.V2, line.V3, line.V4, line.V5,
+	}
 
 	var lineText string
 	if line.V5 != "" {
@@ -443,7 +440,8 @@ func (a *Adapter) UpdatePolicies(sec string, ptype string, oldRules, newRules []
 }
 
 // UpdateFilteredPolicies deletes old rules and adds new rules.
-func (a *Adapter) UpdateFilteredPolicies(sec string, ptype string, newPolicies [][]string, fieldIndex int, fieldValues ...string) ([][]string, error) {
+func (a *Adapter) UpdateFilteredPolicies(sec string, ptype string, newPolicies [][]string, fieldIndex int,
+	fieldValues ...string) ([][]string, error) {
 	oldPolicies := make([][]string, 0)
 	err := a.WithTx(func(tx *ent.Tx) error {
 		cond := make([]predicate.CasbinRule, 0)
