@@ -27,9 +27,9 @@ import (
 	"github.com/casbin/casbin/v2/persist"
 	"github.com/pkg/errors"
 
-	"github.com/casbin/ent-adapter/ent"
-	"github.com/casbin/ent-adapter/ent/casbinrule"
-	"github.com/casbin/ent-adapter/ent/predicate"
+	"github.com/origadmin/ent-adapter/ent"
+	"github.com/origadmin/ent-adapter/ent/casbinrule"
+	"github.com/origadmin/ent-adapter/ent/predicate"
 )
 
 const (

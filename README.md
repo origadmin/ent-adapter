@@ -19,6 +19,20 @@ go get github.com/origadmin/ent-adapter
 ## Usage
 
 ```go
+import (
+    _ "github.com/go-sql-driver/mysql"
+    _ "github.com/jackc/pgx/v5/stdlib"
+    _ "github.com/lib/pq"
+
+    // or sqlite3 with cgo
+    //_ "github.com/mattn/go-sqlite3"
+    // sqlite3 without cgo
+    _ "github.com/sqlite3ent/sqlite3"
+	
+	// or use belows for import all drivers
+    _ "github.com/origadmin/toolkits/contrib/database
+)
+
     a, err := NewAdapter("mysql", "root:@tcp(127.0.0.1:3306)/casbin")
     //a, err := NewAdapter("postgres", "user=postgres password=postgres host=127.0.0.1 port=5432 dbname=casbin")
     if err != nil {
