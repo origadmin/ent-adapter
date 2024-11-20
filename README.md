@@ -1,15 +1,20 @@
-Ent-Adapter
-===
+# Ent-Adapter
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/casbin/gorm-adapter)](https://goreportcard.com/report/github.com/casbin/ent-adapter)
 [![Go](https://github.com/casbin/ent-adapter/actions/workflows/ci.yml/badge.svg)](https://github.com/casbin/ent-adapter/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/casbin/ent-adapter/badge.svg?branch=master)](https://coveralls.io/github/casbin/ent-adapter?branch=master)
 
 Ent Adapter is the [ent](https://github.com/ent/ent) adapter for [Casbin](https://github.com/casbin/casbin). With this library, Casbin can load policy from PostgresSQL/Mysql or save policy to it.
 
+## Description
+
+This project was forked from [ent-adapter](https://github.com/casbin/ent-adapter) with some modifications and optimizations.
+
 ## Installation
 
-    go get github.com/casbin/ent-adapter
-
+```shell
+go get github.com/origadmin/ent-adapter
+```
 
 ## Usage
 
@@ -17,7 +22,7 @@ Ent Adapter is the [ent](https://github.com/ent/ent) adapter for [Casbin](https:
     a, err := NewAdapter("mysql", "root:@tcp(127.0.0.1:3306)/casbin")
     //a, err := NewAdapter("postgres", "user=postgres password=postgres host=127.0.0.1 port=5432 dbname=casbin")
     if err != nil {
-        panic(err)	
+        panic(err) 
     }
     e, err := casbin.NewEnforcer("/path/to/model",a)
 ```
